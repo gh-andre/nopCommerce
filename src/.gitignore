@@ -1,0 +1,13 @@
+# Visual Studio IDE files
+/.vs/
+
+# build output directories for local builds
+bin/
+obj/
+
+# local build output and dependencies (e.g. SendinBlue)
+**/*.pdb
+**/*.dll
+
+# all files under this directory are copied/modified during a build
+/Presentation/Nop.Web/Plugins

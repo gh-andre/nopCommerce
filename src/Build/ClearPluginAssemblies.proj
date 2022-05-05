@@ -14,11 +14,43 @@
   </PropertyGroup> 
 
   <Target Name="NopClear">
-    
+
     <!-- When .NET Core builds a project, it copies all referenced libraries to the output folder.
     For plugins it creates too many unnecessary files that just take up space.
-    At the moment you can't disable this behavior. That's why we have to manually delete all unnecessary libraries from plugin output directories. -->  
+    At the moment you can't disable this behavior. That's why we have to manually delete all unnecessary libraries from plugin output directories.
+
+    This project file is included in other projects, which may set
+    PluginPath to point to a single plug-in (e.g. all plug-in projects)
+    or to a set of semicolon-separated paths (e.g. Nop.Web). This causes
+    a few problems:
+
+      * If a plug-in path ends in a backslash, it may escape the
+        following character (e.g. `path\|SaveLocalesFolders`)
+      * In some cases this command seems to be processed without
+        quotes, which results in SaveLocalesFolders reported as
+        a failed command execution.
+      * If the project is located under a relatively long path,
+        Nop.Web will fail to build without any details. Adding a
+        symlink to the same path makes it work (e.g. a 34 character
+        path)
+      * If the build directory is separate from the project
+        directory (e.g. Azure pipelines), paths are concatenated
+        incorrectly and form something like this, where c:\temp\build
+        is an explicit build folder.
+        
+            c:\nop\Plugins\Nop.Plugin.Payments.CheckMoneyOrder\c:\temp\build.
+
+    Having extra files this project is trying to delete is a lesser
+    problem than all of the above, so it is commented out. A better
+    solution would be just to delete this project.
+    
+    Also, note that all plug-in projects have been modified not to
+    publish, because they are published via Nop.Web, which eliminates
+    the need for this project.
+    -->  
+    <!--
     <Exec Command='dotnet "ClearPluginAssemblies.dll" "OutputPath=$(OutputPath)|PluginPath=$(PluginPath)|SaveLocalesFolders=$(SaveLocalesFolders)"' />
+    -->
   </Target> 
       
 </Project>
