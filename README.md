@@ -1,4 +1,12 @@
-﻿﻿nopCommerce: free and open-source eCommerce solution
+  **This repository is maintained to keep track of changes required to build
+  NopeCommerce from the command line or in a CI pipeline. See this branch
+  for more details.**
+  
+  https://github.com/gh-andre/nopCommerce/tree/release-4.40.4-cmdline/src
+  
+----
+
+  nopCommerce: free and open-source eCommerce solution
 ===========
 
 [nopCommerce](https://www.nopcommerce.com/?utm_source=github&utm_medium=content&utm_campaign=homepage) is the best open-source eCommerce platform. nopCommerce is free, and it is the most popular ASP.NET Core shopping cart.
